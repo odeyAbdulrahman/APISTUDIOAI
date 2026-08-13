@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "../layout/Container";
 import { SalesLineChart } from "./AnalyticsCharts";
 
@@ -15,7 +15,6 @@ const questions = [
     change: "+12.4%",
     insight: "الفترة الأقوى بين 6 و9 مساءً",
     action: "جهّز فريقاً إضافياً قبل الساعة 6",
-    accent: "#7c63ff",
   },
   {
     id: "branch",
@@ -27,7 +26,6 @@ const questions = [
     change: "+18.2%",
     insight: "يمثل 40% من إجمالي مبيعات اليوم",
     action: "طبّق عرض دبي الناجح في فرع الشارقة",
-    accent: "#2dd4a8",
   },
   {
     id: "product",
@@ -39,7 +37,6 @@ const questions = [
     change: "+24.8%",
     insight: "تباع غالباً مع الحلوى بعد الظهر",
     action: "أنشئ عرضاً مشتركاً لرفع قيمة الطلب",
-    accent: "#ffb84d",
   },
   {
     id: "stock",
@@ -51,18 +48,43 @@ const questions = [
     change: "48 ساعة",
     insight: "الحليب والعبوات أقل من حد الأمان",
     action: "أنشئ طلب توريد الآن بضغطة واحدة",
-    accent: "#ff6b8a",
   },
 ];
 
 export function AnalyticsSection() {
   const [activeId, setActiveId] = useState(questions[0].id);
+  const [isPaused, setIsPaused] = useState(false);
   const active = questions.find((item) => item.id === activeId) ?? questions[0];
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = window.setInterval(() => {
+      setActiveId((currentId) => {
+        const currentIndex = questions.findIndex((item) => item.id === currentId);
+        return questions[(currentIndex + 1) % questions.length].id;
+      });
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, [isPaused]);
+
+  const selectQuestion = (id: string) => {
+    setActiveId(id);
+    setIsPaused(true);
+    window.setTimeout(() => setIsPaused(false), 8000);
+  };
 
   return (
     <section className="analytics-section analytics-experience" aria-labelledby="analytics-title">
       <Container>
-        <div className="analytics-story-shell" style={{ "--story-accent": active.accent } as React.CSSProperties}>
+        <div
+          className="analytics-story-shell"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocusCapture={() => setIsPaused(true)}
+          onBlurCapture={() => setIsPaused(false)}
+        >
           <div className="analytics-story-glow" aria-hidden="true" />
 
           <header className="analytics-story-heading">
@@ -79,10 +101,11 @@ export function AnalyticsSection() {
                 role="tab"
                 aria-selected={active.id === item.id}
                 className={active.id === item.id ? "is-active" : ""}
-                onClick={() => setActiveId(item.id)}
+                onClick={() => selectQuestion(item.id)}
               >
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                {item.question}
+                <span className="analytics-question-text">{item.question}</span>
+                {active.id === item.id && <i className="analytics-tab-progress" aria-hidden="true" />}
               </button>
             ))}
           </div>

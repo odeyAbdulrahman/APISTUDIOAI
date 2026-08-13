@@ -1468,7 +1468,7 @@ summary {
 }
 
 .analytics-story-shell {
-  --story-accent: #7c63ff;
+  --story-accent: #6d5ce8;
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -1478,13 +1478,12 @@ summary {
   background:
     linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    radial-gradient(circle at 50% -10%, color-mix(in srgb, var(--story-accent) 22%, transparent), transparent 38%),
-    linear-gradient(145deg, #08112f 0%, #0d1541 55%, #090d29 100%);
+    radial-gradient(circle at 50% -10%, rgba(94, 93, 222, 0.18), transparent 38%),
+    linear-gradient(145deg, #091330 0%, #111947 55%, #0a102d 100%);
   background-size: 42px 42px, 42px 42px, auto, auto;
   box-shadow: 0 36px 90px rgba(7, 16, 45, 0.26);
   color: #ffffff;
   direction: rtl;
-  transition: --story-accent 400ms ease;
 }
 
 .analytics-story-glow {
@@ -1495,7 +1494,7 @@ summary {
   top: 32%;
   left: 35%;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--story-accent) 18%, transparent);
+  background: rgba(94, 93, 222, 0.16);
   filter: blur(100px);
   opacity: 0.75;
   pointer-events: none;
@@ -1557,6 +1556,8 @@ summary {
 }
 
 .analytics-question-rail button {
+  position: relative;
+  overflow: hidden;
   min-height: 62px;
   display: flex;
   align-items: center;
@@ -1586,10 +1587,39 @@ summary {
   color: #ffffff;
 }
 
-.analytics-question-rail button > span {
+.analytics-question-rail button > span:first-child {
   color: var(--story-accent);
   font-family: var(--font-english), sans-serif;
   font-size: 9px;
+}
+
+.analytics-question-text {
+  color: inherit;
+}
+
+.analytics-tab-progress {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  left: 10px;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.analytics-tab-progress::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8d7aff, #ffffff);
+  transform-origin: right;
+  animation: analytics-tab-progress 4.5s linear forwards;
+}
+
+.analytics-story-shell:hover .analytics-tab-progress::after {
+  animation-play-state: paused;
 }
 
 .analytics-answer-stage {
@@ -1866,6 +1896,11 @@ summary {
 @keyframes analytics-answer-in {
   from { opacity: 0; transform: translateY(10px) scale(0.992); }
   to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes analytics-tab-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 .solutions-section {
