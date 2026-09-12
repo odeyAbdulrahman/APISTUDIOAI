@@ -32,6 +32,9 @@ const useCases = [
   ["SaaS integrations", "Bring third-party platforms into existing backend workflows through reviewable, tested changes."],
 ];
 
+const apiSources = ["OpenAPI", "Swagger", "Postman"];
+const deliveryStack = [".NET 8", "Clean Architecture", "Git-native"];
+
 const faqs = [
   ["Does APISTUDIOAI replace developers?", "No. It automates repetitive integration implementation. Developers still define mappings and guardrails, review the code, and approve the Pull Request."],
   ["Does it modify the main branch?", "No. Changes are created on a dedicated branch and presented through a Pull Request. Nothing is merged automatically."],
@@ -65,7 +68,32 @@ export function Hero() {
 
           <HeroShowcase />
         </Container>
-        <Container><div className="source-strip"><span>API sources</span><b>OpenAPI</b><b>Swagger</b><b>Postman</b><i /><span>Initial stack</span><b>.NET 8</b><b>Git-native</b></div></Container>
+      </section>
+
+      <section className="integration-rail-section" aria-label="Integration compatibility">
+        <Container>
+          <div className="integration-rail" aria-label="Supported API sources and delivery stack">
+            <div className="integration-rail-heading">
+              <div><i aria-hidden="true" /><span><small>Integration compatibility</small><strong>One flow, from contract to codebase</strong></span></div>
+              <span className="integration-rail-status">Context-aware</span>
+            </div>
+            <div className="integration-rail-flow">
+              <div className="integration-rail-group">
+                <small>API contract</small>
+                <div>{apiSources.map(source => <span key={source}>{source}</span>)}</div>
+              </div>
+              <div className="integration-rail-bridge" aria-hidden="true">
+                <span />
+                <div><Icon name="boxes" size={17} /><b>APISTUDIOAI</b></div>
+                <span />
+              </div>
+              <div className="integration-rail-group integration-rail-group--target">
+                <small>Your delivery stack</small>
+                <div>{deliveryStack.map(item => <span key={item}>{item}</span>)}</div>
+              </div>
+            </div>
+          </div>
+        </Container>
       </section>
 
       <section className="contrast-section" id="product">
