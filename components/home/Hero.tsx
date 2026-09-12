@@ -4,15 +4,9 @@ import { Icon, type IconName } from "../ui/Icon";
 import { ApiPlayground } from "./ApiPlayground";
 import { ComparisonExperience } from "./ComparisonExperience";
 import { HeroShowcase } from "./HeroShowcase";
+import { MappingExperience } from "./MappingExperience";
 import { ValidationDemo } from "./ValidationDemo";
-
-const workflow = [
-  ["01", "Understand", "Connect your repository. APISTUDIOAI identifies the stack, architecture, conventions, dependencies, and existing integration patterns."],
-  ["02", "Connect", "Import OpenAPI, Swagger, or Postman documentation. Configure the environment, authentication, and headers, then test endpoints."],
-  ["03", "Integrate", "Map external fields to your models, DTOs, commands, services, or entities. Generate code that belongs in your application."],
-  ["04", "Validate", "Restore dependencies, compile the implementation, run tests, check architecture, and verify repository constraints."],
-  ["05", "Ship", "Review every generated and modified file, then open a dedicated branch and Pull Request for your team to approve."],
-];
+import { WorkflowExperience } from "./WorkflowExperience";
 
 const differentiators: { icon: IconName; title: string; body: string }[] = [
   { icon: "search", title: "Understands your codebase", body: "Analyzes the architecture and existing patterns before it writes a line of integration code." },
@@ -106,7 +100,7 @@ export function Hero() {
       <section className="workflow-section" id="workflow">
         <Container>
           <SectionHeading eyebrow="How it works" title="From API documentation to a reviewable Pull Request." body="A complete path from understanding both systems to shipping validated code through the workflow your team already trusts." />
-          <div className="workflow-list">{workflow.map(([num, title, body]) => <article key={num}><b>{num}</b><div><span>{title}</span><p>{body}</p></div></article>)}</div>
+          <WorkflowExperience />
         </Container>
       </section>
 
@@ -137,11 +131,7 @@ export function Hero() {
       <section className="mapping-section">
         <Container>
           <SectionHeading eyebrow="Controlled data mapping" title="Map external data to the models your application already understands." body="Define field relationships and transformations explicitly. APISTUDIOAI keeps developers in control of how external contracts enter the application." />
-          <div className="mapping-board">
-            <div className="mapping-column"><span>External API</span><article><small>string</small><b>employeeId</b></article><article><small>string</small><b>companyLicense</b></article><article><small>date</small><b>joined_at</b></article></div>
-            <div className="mapping-lines"><span>mapped</span><i /><i /><i /></div>
-            <div className="mapping-column"><span>Application</span><article><b>EmiratesId</b><small>ValueObject</small></article><article><b>LicenseNumber</b><small>string</small></article><article><b>JoinedOn</b><small>DateOnly</small></article></div>
-          </div>
+          <MappingExperience />
         </Container>
       </section>
 
