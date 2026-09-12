@@ -6,6 +6,7 @@ import { ComparisonExperience } from "./ComparisonExperience";
 import { GuardrailsExperience } from "./GuardrailsExperience";
 import { HeroShowcase } from "./HeroShowcase";
 import { MappingExperience } from "./MappingExperience";
+import { RepositoryExperience } from "./RepositoryExperience";
 import { ValidationDemo } from "./ValidationDemo";
 import { WorkflowExperience } from "./WorkflowExperience";
 
@@ -112,11 +113,7 @@ export function Hero() {
               <SectionHeading eyebrow="Repository intelligence" title="Your repository becomes the implementation specification." body="Before generation, APISTUDIOAI learns how your application is already built. That context determines where new code belongs and how it should behave." />
               <div className="tag-cloud">{["Framework", "Architecture", "Folder structure", "Naming", "API clients", "Dependency injection", "Logging", "Validation", "Mapping", "Error handling", "Tests", "Packages"].map(tag => <span key={tag}>{tag}</span>)}</div>
             </div>
-            <div className="repo-browser">
-              <header><span><i /> commerce-platform</span><b>Analysis complete</b></header>
-              <div className="repo-tree"><p>src</p><p className="indent">├── Domain <small>protected</small></p><p className="indent">├── Application <b>allowed</b></p><p className="indent2">│   ├── Features</p><p className="indent2">│   └── Integrations</p><p className="indent">└── Infrastructure <b>allowed</b></p><p className="indent2">    └── ApiClients</p></div>
-              <div className="repo-findings"><span>Detected</span><div><b>.NET 8</b><b>Clean Architecture</b><b>CQRS</b><b>MediatR</b><b>FluentValidation</b><b>Serilog</b></div></div>
-            </div>
+            <RepositoryExperience />
           </div>
 
           <div className="split-feature api-feature">
