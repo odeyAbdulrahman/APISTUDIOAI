@@ -1,6 +1,9 @@
 import { Container } from "../layout/Container";
 import { Button } from "../ui/Button";
 import { Icon, type IconName } from "../ui/Icon";
+import { ApiPlayground } from "./ApiPlayground";
+import { HeroShowcase } from "./HeroShowcase";
+import { ValidationDemo } from "./ValidationDemo";
 
 const workflow = [
   ["01", "Understand", "Connect your repository. APISTUDIOAI identifies the stack, architecture, conventions, dependencies, and existing integration patterns."],
@@ -60,30 +63,7 @@ export function Hero() {
             <div className="hero-proof"><span><Icon name="check" size={15} /> Your repository defines the pattern</span><span><Icon name="check" size={15} /> Nothing merges automatically</span></div>
           </div>
 
-          <div className="integration-console" aria-label="APISTUDIOAI integration workflow preview">
-            <div className="console-topbar">
-              <div className="window-dots"><i /><i /><i /></div>
-              <span>payments-gateway / feature/api-integration</span>
-              <b>VALIDATING</b>
-            </div>
-            <div className="console-body">
-              <aside>
-                <small>INTEGRATION</small>
-                {["Repository", "API source", "Endpoints", "Mappings", "Generated files"].map((item, index) => <div className={index === 4 ? "active" : "done"} key={item}><i>{index < 4 ? "✓" : "5"}</i><span>{item}</span></div>)}
-              </aside>
-              <div className="console-main">
-                <header><div><small>BUILD & VALIDATE</small><strong>Payroll API integration</strong></div><span>4 of 5 passed</span></header>
-                <div className="pipeline">
-                  {["Generate", "Restore", "Build", "Test", "Review"].map((step, index) => <div className={index < 4 ? "passed" : "running"} key={step}><i>{index < 4 ? "✓" : "…"}</i><span>{step}</span></div>)}
-                </div>
-                <div className="code-panel">
-                  <div className="code-tabs"><b>EmployeeClient.cs</b><span>EmployeeDto.cs</span><span>MappingProfile.cs</span></div>
-                  <pre><code><em>public sealed class</em> EmployeeClient<br />{"{"}<br />  <span>private readonly</span> HttpClient _http;<br />  <span>private readonly</span> ILogger&lt;EmployeeClient&gt; _log;<br /><br />  <em>public async</em> Task&lt;Result&lt;Employee&gt;&gt; GetAsync(...)<br />  {"{"}<br />    <mark>// Existing Result pattern preserved</mark><br />  {"}"}<br />{"}"}</code></pre>
-                </div>
-                <div className="console-status"><span><i /> Architecture rules passed</span><span>12 files changed</span><strong>Ready for review</strong></div>
-              </div>
-            </div>
-          </div>
+          <HeroShowcase />
         </Container>
         <Container><div className="source-strip"><span>API sources</span><b>OpenAPI</b><b>Swagger</b><b>Postman</b><i /><span>Initial stack</span><b>.NET 8</b><b>Git-native</b></div></Container>
       </section>
@@ -120,13 +100,7 @@ export function Hero() {
           </div>
 
           <div className="split-feature api-feature">
-            <div className="api-explorer">
-              <header><div><span>GET</span><b>/v2/employees/{'{id}'}</b></div><small>200 OK · 184 ms</small></header>
-              <div className="api-body">
-                <aside>{["Parameters", "Headers", "Body", "Response"].map((x, i) => <span className={i === 3 ? "active" : ""} key={x}>{x}</span>)}</aside>
-                <pre><code>{"{"}<br />  <em>"employeeId"</em>: <span>"784-1992-..."</span>,<br />  <em>"companyLicense"</em>: <span>"CN-284901"</span>,<br />  <em>"status"</em>: <span>"active"</span><br />{"}"}</code></pre>
-              </div>
-            </div>
+            <ApiPlayground />
             <div>
               <SectionHeading eyebrow="API intelligence + playground" title="Import the API. Understand it before you implement it." body="Read endpoints, authentication, parameters, request and response schemas, error models, and relationships. Then test real behavior before any code is generated." />
               <ul className="check-list"><li><Icon name="check" size={16} /> Select and test endpoints</li><li><Icon name="check" size={16} /> Configure headers and request bodies</li><li><Icon name="check" size={16} /> Inspect status, latency, responses, and errors</li></ul>
@@ -177,7 +151,7 @@ export function Hero() {
       <section className="validation-section">
         <Container>
           <SectionHeading eyebrow="Generate & validate" title="Generated does not mean finished. Validated does." body="Code is only ready for review after it passes the same practical checks your team expects from any implementation." />
-          <div className="validation-track">{["Generate code", "Restore", "Build", "Run tests", "Architecture check", "Review changes"].map((item, i) => <div key={item}><span>{i + 1}</span><b>{item}</b><small>{i < 5 ? "Passed" : "Ready"}</small></div>)}</div>
+          <ValidationDemo />
           <div className="pr-card">
             <div><span className="pr-icon"><Icon name="cloud-check" size={26} /></span><p><small>PULL REQUEST #184</small><b>Add Ministry employee integration</b><span>feature/ministry-employee-api → main</span></p></div>
             <div className="pr-stats"><span><b>12</b> files changed</span><span><b>38</b> tests passed</span><span><b>0</b> rule violations</span></div>

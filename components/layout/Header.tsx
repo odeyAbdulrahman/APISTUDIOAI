@@ -15,7 +15,7 @@ export function Header() {
     <header className="site-header">
       <Container className="header-inner">
         <a className="wordmark" href="#top" aria-label="APISTUDIOAI home">
-          <Image className="wordmark-image" src="/images/apistudio/apistudio-logo.png" alt="APISTUDIO" width={2290} height={620} priority />
+          <Image className="wordmark-image" src="/images/apistudio/apistudio-logo.png" alt="APISTUDIO" width={2290} height={620} priority unoptimized />
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navigation.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}

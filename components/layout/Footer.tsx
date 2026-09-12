@@ -14,7 +14,7 @@ export function Footer() {
       <Container>
         <div className="footer-top">
           <section className="footer-brand" aria-label="About APISTUDIOAI">
-            <a className="footer-wordmark" href="#top" aria-label="APISTUDIOAI home"><Image src="/images/apistudio/apistudio-logo.png" alt="APISTUDIO" width={2290} height={620} /></a>
+            <a className="footer-wordmark" href="#top" aria-label="APISTUDIOAI home"><Image src="/images/apistudio/apistudio-logo.png" alt="APISTUDIO" width={2290} height={620} unoptimized /></a>
             <p>APISTUDIOAI helps development teams understand external APIs, generate code that fits their architecture, validate the implementation, and ship through standard Git workflows.</p>
           </section>
           <nav className="footer-navigation" aria-label="Footer navigation">
