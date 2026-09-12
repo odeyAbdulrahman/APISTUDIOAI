@@ -1,6 +1,7 @@
 import { Container } from "../layout/Container";
 import { Button } from "../ui/Button";
 import { Icon, type IconName } from "../ui/Icon";
+import { ScrollMotion } from "../ui/ScrollMotion";
 import { ApiPlayground } from "./ApiPlayground";
 import { ComparisonExperience } from "./ComparisonExperience";
 import { FaqExperience } from "./FaqExperience";
@@ -31,6 +32,7 @@ function SectionHeading({ eyebrow, title, body }: { eyebrow: string; title: stri
 export function Hero() {
   return (
     <main id="top">
+      <ScrollMotion />
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-grid-bg" aria-hidden="true" />
         <Container className="hero-layout">

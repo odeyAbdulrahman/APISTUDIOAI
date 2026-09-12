@@ -58,7 +58,7 @@ export function HeroShowcase() {
     <div className="hero-showcase" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <div className="hero-slides">
         {slides.map((slide, index) => (
-          <figure className={index === active ? "is-active" : ""} aria-hidden={index !== active} key={slide.image}>
+          <figure className={index === active ? "is-active" : ""} aria-hidden={index !== active} key={`${slide.title}-${index}`}>
             {"video" in slide ? (
               <video autoPlay muted loop playsInline poster={slide.image} aria-label={index === active ? slide.alt : undefined} style={{ objectPosition: slide.position }}>
                 <source src={slide.video} type="video/mp4" />
