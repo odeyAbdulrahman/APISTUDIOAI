@@ -3,6 +3,7 @@ import { Button } from "../ui/Button";
 import { Icon, type IconName } from "../ui/Icon";
 import { ApiPlayground } from "./ApiPlayground";
 import { ComparisonExperience } from "./ComparisonExperience";
+import { GuardrailsExperience } from "./GuardrailsExperience";
 import { HeroShowcase } from "./HeroShowcase";
 import { MappingExperience } from "./MappingExperience";
 import { ValidationDemo } from "./ValidationDemo";
@@ -154,12 +155,7 @@ export function Hero() {
       <section className="guardrails-section" id="security">
         <Container>
           <SectionHeading eyebrow="Repository guardrails" title="Automate the repetitive work without giving up architectural control." body="Define the files, modules, and dependencies the integration may touch. Guardrails are checked during generation and again during validation." />
-          <div className="guardrail-grid">
-            <article className="allow"><header><Icon name="check" size={18} /><span>Allowed to modify</span></header><b>Application</b><b>Infrastructure</b><p>Follow existing integration patterns</p></article>
-            <article className="protect"><header><Icon name="cloud-check" size={18} /><span>Protected modules</span></header><b>Domain</b><b>Authentication</b><b>Database</b><p>No changes outside approved boundaries</p></article>
-            <article className="rules"><header><Icon name="file-chart" size={18} /><span>Repository rules</span></header><b>Use existing libraries only</b><b>Do not add packages</b><b>Follow naming conventions</b></article>
-          </div>
-          <div className="security-callout"><div><Icon name="cloud-check" size={26} /><span><b>Your code. Your credentials. Your control.</b><small>Credentials stay separate from AI context. Secrets are encrypted, repository permissions are bounded, and every change requires developer approval before merge.</small></span></div><div className="security-points"><span>Encrypted secrets</span><span>Branch-based changes</span><span>No automatic deployment</span></div></div>
+          <GuardrailsExperience />
         </Container>
       </section>
 
