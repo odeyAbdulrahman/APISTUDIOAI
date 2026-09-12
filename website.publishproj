@@ -63,5 +63,23 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <Message Text="Publishing static files from $(_WDPSourceWebPhysicalPath)" Importance="high" />
   </Target>
 
+  <!-- Website projects may still collect the open workspace even when a custom source
+       path is supplied. Replace that collection with the export contents and strip
+       the local /out prefix so index.html, _next, images, and web.config land at root. -->
+  <Target Name="ReplacePublishFilesWithStaticExport"
+          AfterTargets="_CollectFilesForCopyBeforeBuild">
+    <ItemGroup>
+      <_WebFiles Remove="@(_WebFiles)" />
+      <_WebFiles Include="$(MSBuildThisFileDirectory)out\**\*">
+        <DestinationRelativePath>%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+        <Exclude>False</Exclude>
+        <FromTarget>ReplacePublishFilesWithStaticExport</FromTarget>
+        <Category>Run</Category>
+        <ProjectFileType>Default</ProjectFileType>
+      </_WebFiles>
+    </ItemGroup>
+    <Message Text="Prepared @(_WebFiles-&gt;Count()) static files for the website root." Importance="high" />
+  </Target>
+
   <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />
 </Project>
