@@ -11,6 +11,7 @@ const slides = [
     eyebrow: "Product tour · 16 seconds",
     title: "See the integration come together",
     detail: "From repository context to a validated, review-ready implementation.",
+    position: "center center",
   },
   {
     image: "/images/apistudio/hero-integration-workspace.png",
@@ -18,6 +19,7 @@ const slides = [
     eyebrow: "01 · Understand both sides",
     title: "Repository-aware integration",
     detail: "Architecture, API contracts, and code patterns in one workspace.",
+    position: "center center",
   },
   {
     image: "/images/apistudio/hero-api-playground.png",
@@ -25,6 +27,7 @@ const slides = [
     eyebrow: "02 · Test before generation",
     title: "Explore real API behavior",
     detail: "Inspect requests, responses, status, latency, and errors.",
+    position: "62% center",
   },
   {
     image: "/images/apistudio/hero-pull-request.png",
@@ -32,6 +35,7 @@ const slides = [
     eyebrow: "03 · Validate before review",
     title: "Finish with a Pull Request",
     detail: "Builds, tests, constraints, and diffs stay visible to your team.",
+    position: "center center",
   },
 ];
 
@@ -56,11 +60,11 @@ export function HeroShowcase() {
         {slides.map((slide, index) => (
           <figure className={index === active ? "is-active" : ""} aria-hidden={index !== active} key={slide.image}>
             {"video" in slide ? (
-              <video autoPlay muted loop playsInline poster={slide.image} aria-label={index === active ? slide.alt : undefined}>
+              <video autoPlay muted loop playsInline poster={slide.image} aria-label={index === active ? slide.alt : undefined} style={{ objectPosition: slide.position }}>
                 <source src={slide.video} type="video/mp4" />
               </video>
             ) : (
-              <Image src={slide.image} alt={index === active ? slide.alt : ""} fill priority={index === 1} sizes="(max-width: 1024px) 100vw, 68vw" unoptimized />
+              <Image src={slide.image} alt={index === active ? slide.alt : ""} fill priority sizes="(max-width: 1024px) 100vw, 68vw" style={{ objectPosition: slide.position }} unoptimized />
             )}
             <div className="hero-image-wash" />
             <figcaption><small>{slide.eyebrow}</small><strong>{slide.title}</strong><span>{slide.detail}</span></figcaption>

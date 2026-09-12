@@ -54,7 +54,6 @@ export function Hero() {
         <div className="hero-grid-bg" aria-hidden="true" />
         <Container className="hero-layout">
           <div className="hero-content">
-            <div className="eyebrow"><i /> AI-assisted API integration platform</div>
             <h1 id="hero-title">Integrate APIs without breaking your architecture.</h1>
             <p>APISTUDIOAI understands the external API and your existing codebase—then tests, maps, generates, validates, and prepares a production-ready Pull Request.</p>
             <div className="hero-actions" id="start">
