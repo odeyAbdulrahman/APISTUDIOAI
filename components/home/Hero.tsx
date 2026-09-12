@@ -163,12 +163,6 @@ export function Hero() {
         <Container>
           <SectionHeading eyebrow="Generate & validate" title="Generated does not mean finished. Validated does." body="Code is only ready for review after it passes the same practical checks your team expects from any implementation." />
           <ValidationDemo />
-          <div className="pr-card">
-            <div><span className="pr-icon"><Icon name="cloud-check" size={26} /></span><p><small>PULL REQUEST #184</small><b>Add Ministry employee integration</b><span>feature/ministry-employee-api → main</span></p></div>
-            <div className="pr-stats"><span><b>12</b> files changed</span><span><b>38</b> tests passed</span><span><b>0</b> rule violations</span></div>
-            <strong>Ready for team review</strong>
-          </div>
-          <p className="merge-note"><b>Nothing is merged automatically.</b> APISTUDIOAI prepares the implementation. Your team approves it.</p>
         </Container>
       </section>
 
