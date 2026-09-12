@@ -19,7 +19,8 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <ProductVersion>10.0.30319</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{df433e7b-7fa7-41c5-9ce2-8434ef63a3fe}</ProjectGuid>
-    <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
+    <!-- Publish the static Next.js export, not the TypeScript source workspace. -->
+    <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)out\</SourceWebPhysicalPath>
     <SourceWebVirtualPath>/APISTUDIOAI</SourceWebVirtualPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SourceWebProject></SourceWebProject>
@@ -44,5 +45,23 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <Value>$(AssemblyVersion)</Value>
     </AssemblyAttributes>
   </ItemGroup>
+  <Target Name="BuildStaticSite" BeforeTargets="Build">
+    <Message Text="Building the APISTUDIOAI static deployment bundle..." Importance="high" />
+    <Exec WorkingDirectory="$(MSBuildThisFileDirectory)" Command="npm run build:smarterasp" />
+    <Error Condition="!Exists('$(MSBuildThisFileDirectory)out\index.html')" Text="The static export was not created. Run npm run build:smarterasp and publish again." />
+  </Target>
+
+  <!-- Visual Studio supplies the open website folder as a global property during Publish.
+       Override the publisher's internal collection root immediately before it gathers files. -->
+  <Target Name="UseStaticExportForPublish"
+          BeforeTargets="_CollectFilesForCopyBeforeBuild"
+          DependsOnTargets="BuildStaticSite">
+    <PropertyGroup>
+      <_WDPSourceWebPhysicalPath>$(MSBuildThisFileDirectory)out\</_WDPSourceWebPhysicalPath>
+      <_FullSourceWebDir>$(MSBuildThisFileDirectory)out\</_FullSourceWebDir>
+    </PropertyGroup>
+    <Message Text="Publishing static files from $(_WDPSourceWebPhysicalPath)" Importance="high" />
+  </Target>
+
   <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />
 </Project>
