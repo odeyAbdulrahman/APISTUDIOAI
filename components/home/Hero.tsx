@@ -6,6 +6,7 @@ import { ApiPlayground } from "./ApiPlayground";
 import { ComparisonExperience } from "./ComparisonExperience";
 import { FaqExperience } from "./FaqExperience";
 import { GuardrailsExperience } from "./GuardrailsExperience";
+import { GuidedIntegrationDemo } from "./GuidedIntegrationDemo";
 import { HeroShowcase } from "./HeroShowcase";
 import { MappingExperience } from "./MappingExperience";
 import { RepositoryExperience } from "./RepositoryExperience";
@@ -73,6 +74,13 @@ export function Hero() {
               </div>
             </div>
           </div>
+        </Container>
+      </section>
+
+      <section className="guided-demo-section" id="demo">
+        <Container>
+          <SectionHeading eyebrow="Interactive product tour" title="See both systems become one implementation plan." body="Choose a sample API and repository, then watch APISTUDIOAI turn both sources of context into a codebase-compatible, review-ready plan." />
+          <GuidedIntegrationDemo />
         </Container>
       </section>
 

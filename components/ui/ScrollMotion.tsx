@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const revealSelectors = [
   ".integration-rail",
+  ".guided-demo-experience",
   "section:not(.hero):not(.generation-section) .section-heading",
   ".workflow-experience",
   ".implementation-plan",
