@@ -1,65 +1,35 @@
 import Image from "next/image";
 import { Button } from "../ui/Button";
-import { Icon } from "../ui/Icon";
 import { Container } from "./Container";
 
 const navigation = [
-  { label: "تواصل معنا", href: "#contact" },
-  { label: "التكاملات", href: "#integrations", dropdown: true },
-  { label: "الموارد", href: "#resources", dropdown: true },
-  { label: "القطاعات", href: "#industries", dropdown: true },
-  { label: "المنتجات", href: "#products", dropdown: true },
+  { label: "Product", href: "#product" },
+  { label: "How it works", href: "#workflow" },
+  { label: "Features", href: "#features" },
+  { label: "Security", href: "#security" },
+  { label: "Developers", href: "#developers" },
 ];
 
 export function Header() {
   return (
     <header className="site-header">
       <Container className="header-inner">
-        <a className="wordmark" href="#top" aria-label="Skilltax - الصفحة الرئيسية">
-          <Image
-            className="wordmark-image"
-            src="/images/skilltax/brand/skilltax-logo.png"
-            alt="Skilltax"
-            width={640}
-            height={111}
-            priority
-            unoptimized
-          />
+        <a className="wordmark" href="#top" aria-label="APISTUDIOAI home">
+          <Image className="wordmark-image" src="/images/apistudio/apistudio-logo.png" alt="APISTUDIO" width={2290} height={620} priority />
         </a>
-
-        <nav className="desktop-nav" aria-label="التنقل الرئيسي">
-          {navigation.map((item) => (
-            <a className={item.dropdown ? "nav-dropdown" : undefined} href={item.href} key={item.href}>
-              {item.label}
-            </a>
-          ))}
+        <nav className="desktop-nav" aria-label="Primary navigation">
+          {navigation.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
         </nav>
-
         <div className="header-actions">
-          <a className="login-link" href="#login">تسجيل الدخول</a>
-          <Button href="#start" className="header-cta">
-            ابدأ مجاناً <Icon name="arrow-left" size={17} />
-          </Button>
-          <a className="language-link" href="/en">
-            عربي <Icon className="globe-icon" name="globe" size={17} />
-          </a>
+          <a className="login-link" href="#signin">Sign in</a>
+          <Button href="#start" className="header-cta">Start integration</Button>
         </div>
-
         <details className="mobile-menu">
-          <summary aria-label="فتح قائمة التنقل">
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </summary>
-          <nav aria-label="التنقل على الهاتف">
-            {navigation.map((item) => (
-              <a href={item.href} key={item.href}>
-                {item.label}
-              </a>
-            ))}
-            <a href="/en">الإنجليزية</a>
-            <a href="#login">تسجيل الدخول</a>
-            <Button href="#start">ابدأ مجاناً</Button>
+          <summary aria-label="Open navigation menu"><span /><span /><span /></summary>
+          <nav aria-label="Mobile navigation">
+            {navigation.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
+            <a href="#signin">Sign in</a>
+            <Button href="#start">Start integration</Button>
           </nav>
         </details>
       </Container>

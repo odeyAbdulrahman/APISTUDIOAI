@@ -21,7 +21,8 @@ export type IconName =
   | "store"
   | "trending-up"
   | "user"
-  | "users";
+  | "users"
+  | "git-pull-request";
 
 type IconProps = Omit<SVGProps<SVGSVGElement>, "name"> & {
   name: IconName;
@@ -51,6 +52,7 @@ function IconPaths({ name }: { name: IconName }) {
     case "trending-up": return <><path d="m3 17 6-6 4 4 8-9" /><path d="M15 6h6v6" /></>;
     case "user": return <><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></>;
     case "users": return <><path d="M16 21a6 6 0 0 0-12 0" /><circle cx="10" cy="8" r="4" /><path d="M17 11a3 3 0 1 0-1-5.8M19 21a5 5 0 0 0-4-4.6" /></>;
+    case "git-pull-request": return <><circle cx="6" cy="5" r="2" /><circle cx="18" cy="19" r="2" /><path d="M6 7v12M18 17V9a4 4 0 0 0-4-4h-3" /><path d="m13 3-2 2 2 2" /></>;
   }
 }
 
