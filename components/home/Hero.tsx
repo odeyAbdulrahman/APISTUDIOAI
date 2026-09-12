@@ -108,20 +108,33 @@ export function Hero() {
 
       <section className="intelligence-section" id="features">
         <Container>
-          <div className="split-feature repository-feature">
-            <div>
-              <SectionHeading eyebrow="Repository intelligence" title="Your repository becomes the implementation specification." body="Before generation, APISTUDIOAI learns how your application is already built. That context determines where new code belongs and how it should behave." />
-              <div className="tag-cloud">{["Framework", "Architecture", "Folder structure", "Naming", "API clients", "Dependency injection", "Logging", "Validation", "Mapping", "Error handling", "Tests", "Packages"].map(tag => <span key={tag}>{tag}</span>)}</div>
-            </div>
-            <RepositoryExperience />
+          <SectionHeading eyebrow="Two-sided intelligence" title="Understand both sides before generating a line of code." body="Your repository defines how the integration should be built. The external API defines what it must do. APISTUDIOAI combines both into one controlled implementation plan." />
+
+          <div className="intelligence-sources">
+            <article className="intelligence-source">
+              <header><span>01</span><div><small>Repository intelligence</small><h3>Your repository becomes the implementation specification.</h3><p>Architecture, patterns, packages, and boundaries determine where new code belongs.</p></div></header>
+              <RepositoryExperience />
+            </article>
+
+            <div className="intelligence-plus" aria-hidden="true"><span>+</span><small>Understood<br />together</small></div>
+
+            <article className="intelligence-source intelligence-source-api">
+              <header><span>02</span><div><small>API intelligence + playground</small><h3>Import the API. Understand it before you implement it.</h3><p>Endpoints, schemas, authentication, responses, and errors define the external contract.</p></div></header>
+              <ApiPlayground />
+            </article>
           </div>
 
-          <div className="split-feature api-feature">
-            <ApiPlayground />
-            <div>
-              <SectionHeading eyebrow="API intelligence + playground" title="Import the API. Understand it before you implement it." body="Read endpoints, authentication, parameters, request and response schemas, error models, and relationships. Then test real behavior before any code is generated." />
-              <ul className="check-list"><li><Icon name="check" size={16} /> Select and test endpoints</li><li><Icon name="check" size={16} /> Configure headers and request bodies</li><li><Icon name="check" size={16} /> Inspect status, latency, responses, and errors</li></ul>
+          <div className="intelligence-convergence" aria-hidden="true"><i /><span><Icon name="sparkles" size={17} /></span><i /></div>
+
+          <div className="implementation-plan">
+            <header><div><span className="implementation-plan-icon"><Icon name="file-chart" size={22} /></span><p><small>COMPATIBLE IMPLEMENTATION PLAN</small><b>Ministry employee integration</b></p></div><strong><Icon name="check" size={14} /> Ready to generate</strong></header>
+            <div className="implementation-plan-grid">
+              <div><span>01</span><small>Target location</small><b>Infrastructure/ApiClients</b><p>Typed client + auth handler</p></div>
+              <div><span>02</span><small>Application pattern</small><b>CQRS + MediatR</b><p>Query, handler, and result</p></div>
+              <div><span>03</span><small>Contract mapping</small><b>Employee → EmployeeDto</b><p>3 explicit field transforms</p></div>
+              <div><span>04</span><small>Validation plan</small><b>Build + 38 tests</b><p>Architecture rules included</p></div>
             </div>
+            <footer><span><Icon name="boxes" size={16} /> Repository context</span><i /><span><Icon name="globe" size={16} /> API contract</span><b>One codebase-compatible result</b></footer>
           </div>
         </Container>
       </section>
