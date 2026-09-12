@@ -2,6 +2,7 @@ import { Container } from "../layout/Container";
 import { Button } from "../ui/Button";
 import { Icon, type IconName } from "../ui/Icon";
 import { ApiPlayground } from "./ApiPlayground";
+import { ComparisonExperience } from "./ComparisonExperience";
 import { HeroShowcase } from "./HeroShowcase";
 import { ValidationDemo } from "./ValidationDemo";
 
@@ -71,10 +72,7 @@ export function Hero() {
       <section className="contrast-section" id="product">
         <Container>
           <SectionHeading eyebrow="The integration gap" title="A generated client is not an integration." body="Traditional generators understand the API contract. They do not understand the application where the code must live." />
-          <div className="comparison-grid">
-            <article className="comparison-card traditional"><span>Traditional API integration</span><h3>Manual adaptation after generation</h3><ol>{["Read documentation", "Create DTOs and clients", "Configure authentication", "Map external data", "Add logging and errors", "Write tests", "Debug the build", "Prepare a Pull Request"].map((item, i) => <li key={item}><b>{String(i + 1).padStart(2, "0")}</b>{item}</li>)}</ol></article>
-            <article className="comparison-card studio"><span>With APISTUDIOAI</span><h3>One controlled integration workflow</h3><div className="compact-flow">{["Connect repository", "Import API", "Test", "Map", "Generate", "Validate", "Review", "Pull Request"].map((item, i) => <div key={item}><i>{i + 1}</i><b>{item}</b>{i < 7 && <span>→</span>}</div>)}</div><p>Generated for your codebase. Not for a generic project.</p></article>
-          </div>
+          <ComparisonExperience />
         </Container>
       </section>
 

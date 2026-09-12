@@ -5,6 +5,14 @@ import { useEffect, useState } from "react";
 
 const slides = [
   {
+    video: "/images/apistudio/apistudio-product-tour.mp4",
+    image: "/images/apistudio/hero-integration-workspace.png",
+    alt: "Animated APISTUDIOAI product tour showing repository analysis, API testing, and Pull Request validation",
+    eyebrow: "Product tour · 16 seconds",
+    title: "See the integration come together",
+    detail: "From repository context to a validated, review-ready implementation.",
+  },
+  {
     image: "/images/apistudio/hero-integration-workspace.png",
     alt: "Developer workstation showing repository-aware API integration flows",
     eyebrow: "01 · Understand both sides",
@@ -47,7 +55,13 @@ export function HeroShowcase() {
       <div className="hero-slides">
         {slides.map((slide, index) => (
           <figure className={index === active ? "is-active" : ""} aria-hidden={index !== active} key={slide.image}>
-            <Image src={slide.image} alt={index === active ? slide.alt : ""} fill priority={index === 0} sizes="(max-width: 1024px) 100vw, 58vw" unoptimized />
+            {"video" in slide ? (
+              <video autoPlay muted loop playsInline poster={slide.image} aria-label={index === active ? slide.alt : undefined}>
+                <source src={slide.video} type="video/mp4" />
+              </video>
+            ) : (
+              <Image src={slide.image} alt={index === active ? slide.alt : ""} fill priority={index === 1} sizes="(max-width: 1024px) 100vw, 68vw" unoptimized />
+            )}
             <div className="hero-image-wash" />
             <figcaption><small>{slide.eyebrow}</small><strong>{slide.title}</strong><span>{slide.detail}</span></figcaption>
           </figure>
