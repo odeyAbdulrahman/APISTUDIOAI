@@ -7,6 +7,7 @@ import { GuardrailsExperience } from "./GuardrailsExperience";
 import { HeroShowcase } from "./HeroShowcase";
 import { MappingExperience } from "./MappingExperience";
 import { RepositoryExperience } from "./RepositoryExperience";
+import { UseCasesExperience } from "./UseCasesExperience";
 import { ValidationDemo } from "./ValidationDemo";
 import { WorkflowExperience } from "./WorkflowExperience";
 
@@ -17,15 +18,6 @@ const differentiators: { icon: IconName; title: string; body: string }[] = [
   { icon: "boxes", title: "Fits your architecture", body: "Uses the patterns, libraries, naming, and boundaries your application already follows." },
   { icon: "cloud-check", title: "Validates the result", body: "Builds and tests the generated integration, using real errors to improve the implementation." },
   { icon: "git-pull-request", title: "Stays developer-controlled", body: "Moves changes through a branch, visible diff, validation report, and Pull Request." },
-];
-
-const useCases = [
-  ["Government & enterprise", "Connect authority and enterprise services while preserving internal architecture and permission boundaries."],
-  ["HR & employee systems", "Integrate workforce, identity, payroll, and employee data with the models your systems already use."],
-  ["Payments & finance", "Implement payment, invoicing, billing, and financial APIs with controlled authentication and validation."],
-  ["Internal platforms", "Connect services without introducing a different integration pattern in every repository."],
-  ["Legacy applications", "Add modern API integrations to established software without redesigning the entire application."],
-  ["SaaS integrations", "Bring third-party platforms into existing backend workflows through reviewable, tested changes."],
 ];
 
 const apiSources = ["OpenAPI", "Swagger", "Postman"];
@@ -185,8 +177,8 @@ export function Hero() {
 
       <section className="use-cases">
         <Container>
-          <SectionHeading eyebrow="Built for real integration work" title="From modern platforms to established applications." body="Use APISTUDIOAI wherever an external contract must fit a codebase with its own architecture, constraints, and review process." />
-          <div className="use-case-grid">{useCases.map(([title, body], i) => <article key={title}><span>0{i + 1}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
+          <SectionHeading eyebrow="Built for real integration work" title="Built for the integrations your business actually depends on." body="Explore how APISTUDIOAI turns external contracts into architecture-compatible implementations across modern platforms and established applications." />
+          <UseCasesExperience />
         </Container>
       </section>
 
