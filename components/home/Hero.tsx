@@ -3,6 +3,7 @@ import { Button } from "../ui/Button";
 import { Icon, type IconName } from "../ui/Icon";
 import { ApiPlayground } from "./ApiPlayground";
 import { ComparisonExperience } from "./ComparisonExperience";
+import { FaqExperience } from "./FaqExperience";
 import { GuardrailsExperience } from "./GuardrailsExperience";
 import { HeroShowcase } from "./HeroShowcase";
 import { MappingExperience } from "./MappingExperience";
@@ -22,17 +23,6 @@ const differentiators: { icon: IconName; title: string; body: string }[] = [
 
 const apiSources = ["OpenAPI", "Swagger", "Postman"];
 const deliveryStack = [".NET 8", "Clean Architecture", "Git-native"];
-
-const faqs = [
-  ["Does APISTUDIOAI replace developers?", "No. It automates repetitive integration implementation. Developers still define mappings and guardrails, review the code, and approve the Pull Request."],
-  ["Does it modify the main branch?", "No. Changes are created on a dedicated branch and presented through a Pull Request. Nothing is merged automatically."],
-  ["Can it understand an existing architecture?", "Yes. Repository analysis identifies frameworks, folder structure, dependency injection, naming, logging, validation, mapping, testing, and similar integrations."],
-  ["Which API documentation formats are supported?", "The initial product is focused on OpenAPI, Swagger, and Postman Collections."],
-  ["Are API credentials sent to the AI model?", "Credentials remain separate from the AI and code-understanding context. Secrets are encrypted and used only for authorized connection tests."],
-  ["What happens if generated code does not build?", "The validation loop uses build errors and repository context to revise the implementation, then builds and tests it again."],
-  ["Can I control which parts of the repository are modified?", "Yes. Guardrails define allowed and protected areas, package restrictions, naming rules, and other repository constraints."],
-  ["Which programming languages are supported?", "The initial release is focused on modern .NET applications. Support for additional stacks will expand without diluting architecture-aware generation."],
-];
 
 function SectionHeading({ eyebrow, title, body }: { eyebrow: string; title: string; body: string }) {
   return <div className="section-heading"><span>{eyebrow}</span><h2>{title}</h2><p>{body}</p></div>;
@@ -193,8 +183,8 @@ export function Hero() {
 
       <section className="faq-section">
         <Container>
-          <SectionHeading eyebrow="FAQ" title="Clear answers for engineering teams." body="What to expect from the initial APISTUDIOAI product and workflow." />
-          <div className="faq-list">{faqs.map(([q, a], i) => <details open={i === 0} key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div>
+          <SectionHeading eyebrow="Engineering FAQ" title="Technical questions deserve specific answers." body="Explore how APISTUDIOAI handles repositories, credentials, generated code, validation, and developer control." />
+          <FaqExperience />
         </Container>
       </section>
 
