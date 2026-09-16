@@ -19,7 +19,7 @@ npm test
 ## Development CI/CD
 
 The workflow at `.github/workflows/deploy-dev.yml` validates pull requests into
-`dev2`. A push to `dev2` (or a manual workflow run) also builds a production
+`dev`. A push to `dev` (or a manual workflow run) also builds a production
 Docker image, pushes both an immutable commit tag and `latest` to Docker Hub,
 then deploys the immutable image to the development server over SSH.
 
