@@ -1,0 +1,134 @@
+name: APISTUDIOAI UI CI/CD (Development)
+
+on:
+  pull_request:
+    branches:
+      - dev2
+  push:
+    branches:
+      - dev2
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apistudioai-ui-development
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lint, build, and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build and test
+        run: npm test
+
+  release:
+    name: Publish and deploy development image
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    environment: Development
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/apistudioai-ui:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/apistudioai-ui:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: mode=max
+          sbom: true
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.5
+        env:
+          DEPLOY_IMAGE: ${{ secrets.DOCKER_USERNAME }}/apistudioai-ui:${{ github.sha }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: DEPLOY_IMAGE
+          script: |
+            set -eu
+
+            container_name="apistudioai-ui"
+            start_container() {
+              docker run -d \
+                --name "$container_name" \
+                --restart unless-stopped \
+                -p 3000:3000 \
+                -e NODE_ENV=production \
+                -e HOST=0.0.0.0 \
+                -e PORT=3000 \
+                "$1"
+            }
+
+            previous_image=""
+            if docker container inspect "$container_name" >/dev/null 2>&1; then
+              previous_image="$(docker container inspect --format '{{.Image}}' "$container_name")"
+            fi
+
+            docker pull "$DEPLOY_IMAGE"
+            docker rm -f "$container_name" >/dev/null 2>&1 || true
+            if ! start_container "$DEPLOY_IMAGE"; then
+              if [ -n "$previous_image" ]; then
+                start_container "$previous_image"
+              fi
+              exit 1
+            fi
+
+            healthy="false"
+            for attempt in $(seq 1 12); do
+              status="$(docker container inspect --format '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "$container_name")"
+              if [ "$status" = "healthy" ]; then
+                healthy="true"
+                break
+              fi
+              if [ "$status" = "unhealthy" ] || [ "$status" = "exited" ] || [ "$status" = "dead" ]; then
+                break
+              fi
+              sleep 5
+            done
+
+            if [ "$healthy" != "true" ]; then
+              docker logs "$container_name" || true
+              docker rm -f "$container_name" >/dev/null 2>&1 || true
+              if [ -n "$previous_image" ]; then
+                start_container "$previous_image"
+              fi
+              exit 1
+            fi
+
+            docker image prune -f >/dev/null
