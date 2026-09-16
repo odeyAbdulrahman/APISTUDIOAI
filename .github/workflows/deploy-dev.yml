@@ -75,11 +75,12 @@ jobs:
         uses: appleboy/ssh-action@v1.2.5
         env:
           DEPLOY_IMAGE: ${{ secrets.DOCKER_USERNAME }}/apistudioai-ui:${{ github.sha }}
+          UI_HOST_PORT: ${{ vars.UI_HOST_PORT || '3001' }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: DEPLOY_IMAGE
+          envs: DEPLOY_IMAGE,UI_HOST_PORT
           script: |
             set -eu
 
@@ -88,7 +89,7 @@ jobs:
               docker run -d \
                 --name "$container_name" \
                 --restart unless-stopped \
-                -p 3000:3000 \
+                -p "${UI_HOST_PORT}:3000" \
                 -e NODE_ENV=production \
                 -e HOST=0.0.0.0 \
                 -e PORT=3000 \

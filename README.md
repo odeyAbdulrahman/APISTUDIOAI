@@ -34,11 +34,13 @@ secrets:
 | `SSH_USER` | SSH account used for deployment |
 | `SSH_PRIVATE_KEY` | Private key for that SSH account |
 
-The server must have Docker installed, the SSH user must be allowed to run
-Docker without an interactive password prompt, and port `3000` must be
-available. The deployment creates an `apistudioai-ui` container with an
-`unless-stopped` restart policy and rolls back to the prior image if its health
-check fails.
+The server must have Docker installed and the SSH user must be allowed to run
+Docker without an interactive password prompt. The deployment publishes the UI
+on host port `3001` by default and creates an `apistudioai-ui` container with an
+`unless-stopped` restart policy. To use a different host port, define the
+`UI_HOST_PORT` variable in the `Development` GitHub environment. The app still
+listens on port `3000` inside the container. A failed health check rolls the
+deployment back to the prior image.
 
 If the Docker Hub repository is private, log in to Docker Hub once on the
 development server before the first deployment. The image repository is:
