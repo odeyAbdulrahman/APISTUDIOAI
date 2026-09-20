@@ -28,7 +28,7 @@ secrets:
 
 | Secret | Purpose |
 | --- | --- |
-| `DOCKER_USERNAME` | Docker Hub user or organization that owns the image repository |
+| `DOCKER_USERNAME` | Docker Hub user or organization that owns the image @repository |
 | `DOCKER_PASSWORD` | Docker Hub access token with push permission |
 | `SSH_HOST` | Development server hostname or IP address |
 | `SSH_USER` | SSH account used for deployment |
